@@ -15,8 +15,8 @@ SELECT DISTINCT make_title FROM car_models;
 SELECT DISTINCT model_title FROM car_models; 
 
 SELECT make_code, model_code, model_title, year
-FROM car_models;
+FROM car_models
 WHERE make_code = 'LAM';
 
 SELECT DISTINCT * FROM car_models
-WHERE year BETWEEEN 2010 AND 2015;
+WHERE year BETWEEN 2010 AND 2015;

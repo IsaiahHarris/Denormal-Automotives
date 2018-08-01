@@ -9,13 +9,13 @@ OWNER normal_user;
 \c normal_cars;
 \i scripts/denormal_data.sql;
 
-CREATE TABLE makes_table(
+CREATE TABLE makes_table (
   id serial NOT NULL primary key,
-  model_code varchar(125) NOT NULL,
-  model_title varchar (125) NOT NULL
+  make_code varchar(125) NOT NULL,
+  make_title varchar(125) NOT NULL
 );
 
-CREATE TABLE models_table(
+CREATE TABLE models_table (
   id serial NOT NULL primary key,
   model_code varchar(125) NOT NULL,
   model_title varchar(125) NOT NULL,
@@ -24,13 +24,14 @@ CREATE TABLE models_table(
 );
 
 INSERT INTO makes_table (make_code, make_title)
-SELECT DISTINCT make_code, make_title FROM car_models;
+  SELECT DISTINCT make_code, make_title
+  FROM car_models;
 
-INSERT INTO models_table(model_code, model_title, year, make_id)
-SELECT DISTINCT model_code, model_title, year, id AS make_id
-FROM car_models
-INNER JOIN makes_table
-ON car_models.make_title = makes_table.make_title;
+INSERT INTO models_table (model_code, model_title, year, make_id)
+  SELECT DISTINCT model_code, model_title, year, id AS make_id
+  FROM car_models
+  INNER JOIN makes_table 
+  ON car_models.make_title = makes_table.make_title;
 
 SELECT DISTINCT make_title FROM car_models;
 
